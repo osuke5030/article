@@ -130,7 +130,7 @@ def job():
 
                 
 def main():
-    schedule.every(3).seconds.do(job)
+    schedule.every(1).minutes.do(job)
     while True:
         schedule.run_pending()
         time.sleep(1)
