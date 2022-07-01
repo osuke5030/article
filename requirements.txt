@@ -1,0 +1,6 @@
+schedule
+beautifulsoup4
+requests
+requests_oauthlib
+python-dotenv
+openpyxl
