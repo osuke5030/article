@@ -75,7 +75,6 @@ def job():
         r_text=response.text
         soup = BeautifulSoup(r_text, 'html.parser')
 
-       
         if soup_text[:5]=="【リーク】":
             soup_h1=soup.find_all("h1",attrs={"class","page-title"})[0].text.replace("抽選/定価/販売店舗まとめ","").replace("【リーク】","")
             soup_text=soup.find_all("div",attrs={"class","article-content"})[0].text.replace("\n","").replace("\t","")
@@ -84,7 +83,7 @@ def job():
             pos2=text1.find("発売予定！")
             soup_cap=text1[:pos2+5]
             params = {'status':"リーク情報!!!\n\n{}\n\n{}\n\n情報が入り次第更新!!!".format(soup_h1,soup_cap),'media_ids':[media_id]}
-            wb = openpyxl.load_workbook("sneaker.xlsx")
+            wb = openpyxl.load_workbook('/Users/kuramochiosuke/Desktop/スニーカー記事/sneaker.xlsx')
             ws = wb["Sheet1"]
             for i in range(wb['Sheet1'].max_row):
                 if ws.cell(row=i+1,column=1).value==params["status"]:
@@ -104,7 +103,7 @@ def job():
                 soup_app_name=soup_block.find_all("div",attrs={"class","left-box"})[0].text
                 soup_data=soup_block.find_all("div",attrs={"class","shop-right-box"})[0].text
                 params = {'status': "{}\n\n{}  {}\n{}\n".format(soup_text,soup_app_name,soup_data,soup_link),'media_ids':[media_id]}
-                wb = openpyxl.load_workbook("sneaker.xlsx")
+                wb = openpyxl.load_workbook('/Users/kuramochiosuke/Desktop/スニーカー記事/sneaker.xlsx')
                 ws = wb["Sheet1"]
                 for i in range(wb['Sheet1'].max_row):
                     if ws.cell(row=i+1,column=1).value==params["status"]:
