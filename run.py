@@ -51,7 +51,7 @@ def job():
 
 
     # 記事の取得 
-    soup_article=soup.find_all("article",attrs={"class","article-list"})[0]      
+    soup_article=soup.find_all("article",attrs={"class","article-list"})[1]      
     soup_text=soup_article.find_all("h3")[0].find("a").text.replace("\n","").replace("\t","").replace("定価/","")
     # 画像の取得
     soup_img=soup_article.find_all("img")[0]['src']
@@ -84,6 +84,7 @@ def job():
             soup_cap=text1[:pos2+5]
             params = {'status':"リーク情報!!!\n\n{}\n\n{}\n\n情報が入り次第更新!!!".format(soup_h1,soup_cap),'media_ids':[media_id]}
             wb = openpyxl.load_workbook('/Users/kuramochiosuke/Desktop/スニーカー記事/sneaker.xlsx')
+            time.sleep(1)
             ws = wb["Sheet1"]
             for i in range(wb['Sheet1'].max_row):
                 if ws.cell(row=i+1,column=1).value==params["status"]:
@@ -104,6 +105,7 @@ def job():
                 soup_data=soup_block.find_all("div",attrs={"class","shop-right-box"})[0].text
                 params = {'status': "{}\n\n{}  {}\n{}\n".format(soup_text,soup_app_name,soup_data,soup_link),'media_ids':[media_id]}
                 wb = openpyxl.load_workbook('/Users/kuramochiosuke/Desktop/スニーカー記事/sneaker.xlsx')
+                time.sleep(1)
                 ws = wb["Sheet1"]
                 for i in range(wb['Sheet1'].max_row):
                     if ws.cell(row=i+1,column=1).value==params["status"]:
@@ -128,7 +130,7 @@ def job():
 
                 
 def main():
-    schedule.every(1).minutes.do(job)
+    schedule.every(3).seconds.do(job)
     while True:
         schedule.run_pending()
         time.sleep(1)
