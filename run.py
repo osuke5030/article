@@ -120,7 +120,11 @@ def job():
             print("除外")
             print("")
     except IndexError:
-        print("エラーです")       
+        print("INDEX エラーです")       
+        print("")
+    
+    except FileNotFoundError:
+        print("NOT FILE エラーです")       
         print("")
 
                 
