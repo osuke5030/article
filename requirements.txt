@@ -5,3 +5,5 @@ requests_oauthlib
 python-dotenv
 openpyxl
 os
+sys
+json
