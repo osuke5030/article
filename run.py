@@ -51,7 +51,7 @@ def job():
 
 
     # 記事の取得 
-    soup_article=soup.find_all("article",attrs={"class","article-list"})[1]      
+    soup_article=soup.find_all("article",attrs={"class","article-list"})[0]      
     soup_text=soup_article.find_all("h3")[0].find("a").text.replace("\n","").replace("\t","").replace("定価/","")
     # 画像の取得
     soup_img=soup_article.find_all("img")[0]['src']
