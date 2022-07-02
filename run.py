@@ -85,8 +85,13 @@ def job():
                 pos3=text1.find("発売！")
                 if pos3<10:
                     pos4=text1.find("復刻予定！")
-                    soup_cap=text1[:pos4+5]
-                    params = {'status':"リーク情報!!!\n\n{}\n\n{}\n\n情報が入り次第更新!!!".format(soup_h1,soup_cap),'media_ids':[media_id]}
+                    if pos4<10:
+                        pos5=text1.find("リリース！")
+                        soup_cap=text1[:pos5+5]
+                        params = {'status':"リーク情報!!!\n\n{}\n\n{}\n\n情報が入り次第更新!!!".format(soup_h1,soup_cap),'media_ids':[media_id]}
+                    else:
+                        soup_cap=text1[:pos4+5]
+                        params = {'status':"リーク情報!!!\n\n{}\n\n{}\n\n情報が入り次第更新!!!".format(soup_h1,soup_cap),'media_ids':[media_id]}
                 else:
                     soup_cap=text1[:pos3+3]
                     params = {'status':"リーク情報!!!\n\n{}\n\n{}\n\n情報が入り次第更新!!!".format(soup_h1,soup_cap),'media_ids':[media_id]}
@@ -94,7 +99,6 @@ def job():
                 soup_cap=text1[:pos2+5]
                 params = {'status':"リーク情報!!!\n\n{}\n\n{}\n\n情報が入り次第更新!!!".format(soup_h1,soup_cap),'media_ids':[media_id]}
             wb = openpyxl.load_workbook('sneaker.xlsx')
-            time.sleep(1)
             ws = wb["Sheet1"]
             for i in range(wb['Sheet1'].max_row):
                 if ws.cell(row=i+1,column=1).value==params["status"]:
@@ -116,7 +120,6 @@ def job():
                 soup_data=soup_block.find_all("div",attrs={"class","shop-right-box"})[0].text
                 params = {'status': "{}\n\n{}  {}\n{}\n".format(soup_text,soup_app_name,soup_data,soup_link),'media_ids':[media_id]}
                 wb = openpyxl.load_workbook('sneaker.xlsx')
-                time.sleep(1)
                 ws = wb["Sheet1"]
                 for i in range(wb['Sheet1'].max_row):
                     if ws.cell(row=i+1,column=1).value==params["status"]:
