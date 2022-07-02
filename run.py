@@ -95,11 +95,12 @@ def job():
                 if ws.cell(row=i+1,column=1).value==params["status"]:
                     print("投稿済みです")
                     break    
-                elif i==wb['Sheet1'].max_row-1:
-                    twitter.post(url_text, params = params)
-                    print("投稿しました")    
+                elif i==wb['Sheet1'].max_row-1:  
                     ws.cell(row=wb['Sheet1'].max_row+1,column=1).value = params["status"]
                     wb.save('sneaker.xlsx')
+                    print("保存しました")
+                    twitter.post(url_text, params = params)
+                    print("投稿しました")  
             print("")
         elif soup_text[:5]=="【販売リン":
             a_count=len(soup.find_all("div",attrs={"class","sneaker-release-shop-box pre-release"})[0].find_all("a"))
@@ -116,11 +117,12 @@ def job():
                     if ws.cell(row=i+1,column=1).value==params["status"]:
                         print("投稿済みです")
                         break    
-                    elif i==wb['Sheet1'].max_row-1:
-                        twitter.post(url_text, params = params)
-                        print("投稿しました")    
+                    elif i==wb['Sheet1'].max_row-1:   
                         ws.cell(row=wb['Sheet1'].max_row+1,column=1).value = params["status"]
                         wb.save('sneaker.xlsx')
+                        print("保存しました")
+                        twitter.post(url_text, params = params)
+                        print("投稿しました")  
                 print("")
         else:
             print("除外")
