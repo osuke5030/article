@@ -102,7 +102,7 @@ def job():
                     twitter.post(url_text, params = params)
                     print("投稿しました")  
             print("")
-        elif soup_text[:5]=="【販売リン":
+        elif soup_text[:9]=="【販売リンクあり】":
             a_count=len(soup.find_all("div",attrs={"class","sneaker-release-shop-box pre-release"})[0].find_all("a"))
             for i in range(a_count):
                 soup_block=soup.find_all("div",attrs={"class","sneaker-release-shop-box"})[0].find_all("a")[i]
