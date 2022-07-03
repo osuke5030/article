@@ -138,13 +138,13 @@ def job():
         print("処理終了")
     except IndexError:
         print("INDEX エラーです")       
-        print("処理終了")
+        print("")
     except FileNotFoundError:
         print("NOT FILE エラーです")       
-        print("処理終了")
+        print("")
     except KeyError:
         print("KeyError エラーです")       
-        print("処理終了")
+        print("")
 
 
 
