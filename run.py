@@ -87,8 +87,13 @@ def job():
                         pos4=text1.find("復刻予定！")
                         if pos4<10:
                             pos5=text1.find("リリース！")
-                            soup_cap=text1[:pos5+5]
-                            params = {'status':"リーク情報!!!\n\n{}\n\n{}\n\n情報が入り次第更新!!!".format(soup_h1,soup_cap),'media_ids':[media_id]}
+                            if pos5<10:
+                                pos6=text1.find("リリース予定！")
+                                soup_cap=text1[:pos6+7]
+                                params = {'status':"リーク情報!!!\n\n{}\n\n{}\n\n情報が入り次第更新!!!".format(soup_h1,soup_cap),'media_ids':[media_id]}
+                            else:
+                                soup_cap=text1[:pos5+5]
+                                params = {'status':"リーク情報!!!\n\n{}\n\n{}\n\n情報が入り次第更新!!!".format(soup_h1,soup_cap),'media_ids':[media_id]}
                         else:
                             soup_cap=text1[:pos4+5]
                             params = {'status':"リーク情報!!!\n\n{}\n\n{}\n\n情報が入り次第更新!!!".format(soup_h1,soup_cap),'media_ids':[media_id]}
