@@ -140,7 +140,6 @@ def job():
             else:
                 print("除外")
                 print("")
-            print("処理終了")
         except IndexError:
             print("INDEX エラーです")       
             print("")
