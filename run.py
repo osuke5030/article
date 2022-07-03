@@ -35,8 +35,8 @@ def job():
 
     # ここまでTwitter投稿の準備
     print("投稿準備完了")
-    try:
-        for i in range(12):
+    for i in range(12):
+        try:
             #スニだんのページの指定
             URL = 'https://snkrdunk.com'
             # リクエストヘッダの指定
@@ -140,17 +140,17 @@ def job():
             else:
                 print("除外")
                 print("")
-        print("処理終了")
-    except IndexError:
-        print("INDEX エラーです")       
-        print("")
-    except FileNotFoundError:
-        print("NOT FILE エラーです")       
-        print("")
-    except KeyError:
-        print("KeyError エラーです")       
-        print("")
-
+            print("処理終了")
+        except IndexError:
+            print("INDEX エラーです")       
+            print("")
+        except FileNotFoundError:
+            print("NOT FILE エラーです")       
+            print("")
+        except KeyError:
+            print("KeyError エラーです")       
+            print("")
+    print("処理終了")
 
 
                 
