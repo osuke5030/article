@@ -146,6 +146,7 @@ def job():
         except KeyError:
             print("KeyError エラーです")       
             print("")
+    print("処理終了")
 
                 
 def main():
