@@ -35,39 +35,39 @@ def job():
 
     # ここまでTwitter投稿の準備
     print("投稿準備完了")
-
-    for i in range(12):
-        #スニだんのページの指定
-        URL = 'https://snkrdunk.com'
-        # リクエストヘッダの指定
-        headers = {"User-Agent": "hoge"}
-        response = requests.get(URL,  headers=headers)
-        r_text=response.text
-        soup = BeautifulSoup(r_text, 'html.parser')
-
-
-        print('スニダンのページの取得完了')
+    try:
+        for i in range(12):
+            #スニだんのページの指定
+            URL = 'https://snkrdunk.com'
+            # リクエストヘッダの指定
+            headers = {"User-Agent": "hoge"}
+            response = requests.get(URL,  headers=headers)
+            r_text=response.text
+            soup = BeautifulSoup(r_text, 'html.parser')
 
 
-
-        # 記事の取得 
-        soup_article=soup.find_all("article",attrs={"class","article-list new"})[i]      
-        soup_text=soup_article.find_all("h3")[0].find("a").text.replace("\n","").replace("\t","").replace("定価/","")
-        # 画像の取得
-        soup_img=soup_article.find_all("img")[0]['src']
-        # 詳細ページのリンクを取得
-        soup_url="https://snkrdunk.com/"+soup_article.find("a")['href']
-        # 画像の処理
-        response = requests.get(soup_img)
-        image = response.content
-        files = {"media" : image}
-        req_media = twitter.post(url_media, files = files)
-        media_id = json.loads(req_media.text)['media_id']
-        print('画像の取得完了')
+            print('スニダンのページの取得完了')
 
 
-        print("ここから詳細ページ")
-        try:
+
+            # 記事の取得 
+            soup_article=soup.find_all("article",attrs={"class","article-list new"})[i]      
+            soup_text=soup_article.find_all("h3")[0].find("a").text.replace("\n","").replace("\t","").replace("定価/","")
+            # 画像の取得
+            soup_img=soup_article.find_all("img")[0]['src']
+            # 詳細ページのリンクを取得
+            soup_url="https://snkrdunk.com/"+soup_article.find("a")['href']
+            # 画像の処理
+            response = requests.get(soup_img)
+            image = response.content
+            files = {"media" : image}
+            req_media = twitter.post(url_media, files = files)
+            media_id = json.loads(req_media.text)['media_id']
+            print('画像の取得完了')
+
+
+            print("ここから詳細ページ")
+            
             URL = soup_url
             # リクエストヘッダの指定
             headers = {"User-Agent": "hoge"}
@@ -135,18 +135,18 @@ def job():
             else:
                 print("除外")
                 print("")
-        except IndexError:
-            print("INDEX エラーです")       
-            print("")
+        print("処理終了")
+    except IndexError:
+        print("INDEX エラーです")       
+        print("処理終了")
+    except FileNotFoundError:
+        print("NOT FILE エラーです")       
+        print("処理終了")
+    except KeyError:
+        print("KeyError エラーです")       
+        print("処理終了")
 
-        except FileNotFoundError:
-            print("NOT FILE エラーです")       
-            print("")
 
-        except KeyError:
-            print("KeyError エラーです")       
-            print("")
-    print("処理終了")
 
                 
 def main():
