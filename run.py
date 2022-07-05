@@ -64,6 +64,7 @@ def job():
             files = {"media" : image}
             req_media = twitter.post(url_media, files = files)
             media_id = json.loads(req_media.text)['media_id']
+            print(media_id)
             print('画像の取得完了')
 
 
