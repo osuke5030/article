@@ -36,6 +36,7 @@ def job():
     # ここまでTwitter投稿の準備
     print("投稿準備完了")
     for i in range(12):
+        print(1)
         try:
             #スニだんのページの指定
             URL = 'https://snkrdunk.com'
